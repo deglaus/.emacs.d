@@ -44,12 +44,6 @@
 (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
 
 
-;; Initialize queue
-(load-file "~/.emacs.d/queue.el")
-(add-to-list 'load-path "~/.emacs.d/undo-tree")
-(require 'undo-tree)
-(global-undo-tree-mode)
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
