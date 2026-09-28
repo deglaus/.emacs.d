@@ -14,7 +14,10 @@
  
 (add-hook 'emacs-startup-hook 'startup/revert-file-name-handler-alist)
 (add-hook 'emacs-startup-hook 'startup/reset-gc)
-;;
+;; disable annoying overwrite mode
+(setq overwrite-mode nil)
+(put 'overwrite-mode 'disabled t)
+(global-set-key (kbd "<insert>") #'ignore)
 
 ;; Initialize melpa repo
 (require 'package)
@@ -40,11 +43,33 @@
 ;; Set emacs to fullscreen upon launch
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+
 ;; Load config.org for init.el configuration
 (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
 
+;; Syntaxing
+(add-to-list 'auto-mode-alist '("\\.sm\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.slicc\\'" . c++-mode))
 
+;;;; NYAN
+(require 'package)
 
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'nyan-mode)
+  (package-install 'nyan-mode))
+
+(require 'nyan-mode)
+(nyan-mode 1)
+(nyan-start-animation)
+(setq nyan-animate-nyancat t)
+(setq nyan-wavy-trail t)
+;;;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,9 +80,10 @@
  '(custom-safe-themes
    '("f137a76eab702d9b967e928c6f5526ac263fde0ade01f1cbcb78835637645f4c" "5d2953871baac3b77e2ed6cc606724672e27e939c973568a3b7fe80b8af8d4bf" "e2ddc4645016398e70a3abac2e3c8c6af2787bfe35dfc9cab53f76a6aec7a10c" "5f7280d1c4c655b850f2a8ad5fa7db3e5bda1de7ec57d3504c2463d8413b8e6e" "acb636fb88d15c6dd4432e7f197600a67a48fd35b54e82ea435d7cd52620c96d" default))
  '(package-selected-packages
-   '(meghanada company-irony company-c-headers yasnippet-snippets yasnippet company magit treemacs-icons-dired treemacs-evil treemacs undo-tree page-break-lines async ido-vertical-mode switch-window avy beacon evil swiper which-key dashboard spaceline diminish auto-package-update htmlize use-package))
+   '(polymode meghanada company-irony company-c-headers yasnippet-snippets yasnippet company magit treemacs-icons-dired treemacs-evil treemacs undo-tree page-break-lines async ido-vertical-mode switch-window avy beacon evil swiper which-key dashboard spaceline diminish auto-package-update htmlize use-package))
  '(smtpmail-smtp-server "imap.gmail.com" t)
- '(smtpmail-smtp-service 587 t))
+ '(smtpmail-smtp-service 587 t)
+ '(warning-suppress-log-types '(((package reinitialization)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
