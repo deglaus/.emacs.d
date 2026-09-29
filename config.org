@@ -781,27 +781,29 @@ TODO: add
 ** lsp
 *** Code
 #+BEGIN_SRC emacs-lisp
-  (unless (package-installed-p 'eglot)
-    (package-install 'eglot))
+    (unless (package-installed-p 'eglot)
+      (package-install 'eglot))
 
 
-(dolist (hook '(python-mode-hook python-ts-mode-hook c-mode-hook c++-mode-hook c-ts-mode-hook c++-ts-mode-hook))
-  (add-hook hook #'eglot-ensure))
+  (dolist (hook '(python-mode-hook python-ts-mode-hook c-mode-hook c++-mode-hook c-ts-mode-hook c++-ts-mode-hook))
+    (add-hook hook #'eglot-ensure))
+
+  ;; (with-eval-after-load 'eglot (add-to-list 'eglot-server-programs '(python-base-mode . ("ruff" "server"))))
 
 #+END_SRC
 * Social section
 ** Telegram
 *** Code
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-(add-to-list 'package-pinned-packages '(telega . "melpa-stable"))
+  ;; (add-to-list 'package-archives
+  ;;              '("melpa-stable" . "https://stable.melpa.org/packages/"))
+  ;; (add-to-list 'package-pinned-packages '(telega . "melpa-stable"))
 
-(use-package telega
-  :load-path  "~/telega.el"
-  :commands (telega)
-  :defer t)
+  ;; (use-package telega
+  ;;   :load-path  "~/telega.el"
+  ;;   :commands (telega)
+  ;;   :defer t)
 
-;; (setq telega-use-docker t)
+  ;; (setq telega-use-docker t)
 #+END_SRC
 

@@ -52,15 +52,6 @@
 (add-to-list 'auto-mode-alist '("\\.slicc\\'" . c++-mode))
 
 ;;;; NYAN
-(require 'package)
-
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
 (unless (package-installed-p 'nyan-mode)
   (package-install 'nyan-mode))
 
@@ -90,3 +81,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(setq dashboard-footer-messages 
+      '("We'll get a response any moment now..."
+        "GNU/Linux's finest!"
+        "What is a vim? I only know emacs."
+
+		))
